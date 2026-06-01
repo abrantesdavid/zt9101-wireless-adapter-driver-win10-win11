@@ -26,9 +26,12 @@ zt9101d_drv.cat
 This driver was kept as a backup because newer drivers provided through Windows Update may not work correctly on some systems.
 
 ## Hardware ID
-This driver is known to work with the following hardware ID:
+- This driver is known to work with the following hardware ID:
+
 USB\VID_350B&PID_9101
-Full device ID:
+
+- Full device ID:
+
 USB\VID_350B&PID_9101&REV_0000
 
 ## Notes

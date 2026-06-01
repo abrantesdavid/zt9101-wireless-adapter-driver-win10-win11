@@ -9,7 +9,7 @@ If you are the original author, publisher, or copyright holder and would like th
 Use this software at your own risk. I provide no guarantees regarding compatibility, stability, security, or performance.
 
 ## Installation
-1. Download the files.
+1. Download the files in `releases`.
 2. Right-click `zt9101d_drv.inf`.
 3. Select **Install**.
 4. Reconnect the adapter if necessary.

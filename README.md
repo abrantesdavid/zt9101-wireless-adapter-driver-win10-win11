@@ -42,7 +42,38 @@ USB\VID_350B&PID_9101
 
 Many generic 802.11n adapters are sold under the same model name but use different chipsets. Verify your Hardware ID before installing this driver.
 
+# How to Find Your Hardware ID
 
+Before installing this driver, verify that your adapter uses the same chipset.
+
+### Step 1: Open Device Manager
+Press Win + X
+Click Device Manager
+### Step 2: Locate Your Wireless Adapter
+
+Find your Wi-Fi adapter under:
+
+- Network adapters
+
+or, if the driver is not installed:
+
+- Other devices
+- Unknown device
+### Step 3: Open Device Properties
+- Right-click the adapter
+- Click Properties
+### Step 4: Open the Details Tab
+- Select the Details tab
+- In the Property dropdown menu, choose Hardware IDs
+### Step 5: Check the Hardware ID
+
+You should see something similar to:
+
+USB\VID_350B&PID_9101
+
+or
+
+USB\VID_350B&PID_9101&REV_0000
 
 
 

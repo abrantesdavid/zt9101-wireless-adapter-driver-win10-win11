@@ -1,10 +1,7 @@
 # ZT9101 802.11n Wireless USB Adapter Driver
 > Supported Hardware ID:
->
-> USB\VID_350B&PID_9101&REV_0000
 > 
 > USB\VID_350B&PID_9101
-> 
 # Disclaimer
 I am not the author, developer, or copyright holder of this driver.
 
@@ -22,21 +19,6 @@ Use this software at your own risk. I provide no guarantees regarding compatibil
 3. Select **Install**.
 4. Reconnect the adapter if necessary.
 5. Restart Windows if the device is not detected immediately.
-
-## Files
-zt9101d_drv.inf
-
-zt9101d_drv.sys
-
-zt9101d_drv.cat
-
-
-## Tested Device
-
-- Model: LV-UW06
-- Type: USB Wireless Adapter
-- Standard: IEEE 802.11n
-- Frequency: 2.4 GHz
 
 ## Notes
 
@@ -91,6 +73,19 @@ Some users may experience:
 
 If Windows installs a different driver automatically, reinstall `zt9101d_drv.inf`.
 
+## Files
+zt9101d_drv.inf
+
+zt9101d_drv.sys
+
+zt9101d_drv.cat
+
+## Tested Device
+
+- Model: LV-UW06
+- Type: USB Wireless Adapter
+- Standard: IEEE 802.11n
+- Frequency: 2.4 GHz
 
 
 

@@ -1,5 +1,7 @@
 # ZT9101 802.11n Wireless USB Adapter Driver
 > Supported Hardware ID:
+>
+> USB\VID_350B&PID_9101&REV_0000
 > 
 > USB\VID_350B&PID_9101
 > 

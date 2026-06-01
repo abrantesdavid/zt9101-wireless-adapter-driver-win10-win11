@@ -1,0 +1,246 @@
+; /****************************************************************************
+; Copyright (c) ZTOP MICROELECTRONICS CORP                   **
+; ****************************************************************************/
+
+[version]
+Signature   = "$Windows NT$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %ZTOP% 
+;Provider    = %Msft%
+;LayoutFile  = layout.inf
+PnpLockdown = 1
+CatalogFile = zt9101d_drv.cat
+DriverVer = 01/30/2024,15.56.1.960
+
+[DestinationDirs]
+ZTOP.CopyFiles          = 12
+;DefaultDestDirs            = 12
+;CoInstaller_CopyFiles	   = 12
+
+[Manufacturer]
+%ZTOP%     = ZTOP, NTamd64, NTx86
+
+
+;[ControlFlags]
+;ExcludeFromSelect = *
+
+
+[ZTOP.NTx86]
+; DisplayName                   Section         DeviceID
+; -----------                   -------         --------
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9101		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9106		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9107		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_2310&PID_9086		;old
+[ZTOP.NTamd64]
+; DisplayName                   Section         DeviceID
+; -----------                   -------         --------
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9101		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9106		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_350B&PID_9107		;old
+%ZTOP.DeviceDesc_9101%       = ZTOP.ndi,  USB\VID_2310&PID_9086		;old
+
+[ZTOP.ndi.NTx86]
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.CopyFiles
+Characteristics = 0x84
+BusType         = 15
+AddReg          = ZTOP.reg
+CopyFiles       = ZTOP.CopyFiles
+*IfType         = 71            ; IF_TYPE_IEEE80211
+*MediaType      = 16            ; NdisMediumNative802_11
+*PhysicalMediaType = 9          ; NdisPhysicalMediumNative802_11
+
+[ZTOP.ndi.NTAMD64]
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.CopyFiles
+Characteristics = 0x84
+BusType         = 15
+AddReg          = ZTOP.reg
+CopyFiles       = ZTOP.CopyFiles
+*IfType         = 71            ; IF_TYPE_IEEE80211
+*MediaType      = 16            ; NdisMediumNative802_11
+*PhysicalMediaType = 9          ; NdisPhysicalMediumNative802_11
+
+[ZTOP.ndi.NTx86.Services]
+AddService = zt9101d_drv, 2, ZTOP.Service, ZTOP.EventLog
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.Services
+
+[ZTOP.ndi.NTAMD64.Services]
+AddService = zt9101d_drv, 2, ZTOP.Service, ZTOP.EventLog
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.Services
+
+[ZTOP.ndi.NTx86.HW]
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.PnPFilterRegistration
+
+[ZTOP.ndi.NTAMD64.HW]
+Include         = netvwifibus.inf
+Needs			= VWiFiBus.PnPFilterRegistration
+
+[ZTOP.reg]
+HKR, Ndi,                         Service,    0, "zt9101d_drv"
+
+HKR, Ndi\Interfaces,			  LowerRange, 0, "wlan,ethernet,vwifi"
+
+HKR, Ndi\Interfaces,              UpperRange, 0, "ndis5"
+;HKR, Ndi\Interfaces,              LowerRange, 0, "wlan,ethernet"
+
+HKR, Ndi\params\LocalSSID,					ParamDesc,  0, "%LocalSSID%"
+HKR, Ndi\params\LocalSSID,					default,    0, "ZT-STA"
+HKR, Ndi\params\LocalSSID,					type,       0, "char"
+
+HKR, Ndi\params\BandWidth,		  ParamDesc,  0, "%BandWidth%"
+HKR, Ndi\params\BandWidth,		  default,    0, "1"
+HKR, Ndi\params\BandWidth,		  type,       0, "enum"
+HKR, Ndi\params\BandWidth\enum,  "0",      0, "20M"
+HKR, Ndi\params\BandWidth\enum,  "1",      0, "20/40M"
+
+HKR, Ndi\params\BlockAckEnable,  ParamDesc,  0, "%BlockAckEnable%"
+HKR, Ndi\params\BlockAckEnable,		  default,    0, "1"
+HKR, Ndi\params\BlockAckEnable,		  type,       0, "enum"
+HKR, Ndi\params\BlockAckEnable\enum,  "0",      0, "Disable"
+HKR, Ndi\params\BlockAckEnable\enum,  "1",      0, "Enable"
+
+HKR, Ndi\params\ScanChannelTime,  ParamDesc,  0, "%ScanChannelTime%"
+HKR, Ndi\params\ScanChannelTime,  default,    0, "50"
+HKR, Ndi\params\ScanChannelTime,  min,        0, "30"
+HKR, Ndi\params\ScanChannelTime,  max,        0, "50"
+HKR, Ndi\params\ScanChannelTime,  step,       0, "10"
+HKR, Ndi\params\ScanChannelTime,  Base,       0, "10"
+HKR, Ndi\params\ScanChannelTime,  type,       0, "int"
+
+HKR, Ndi\params\ScanProbeTimes,  ParamDesc,  0, "%ScanProbeTimes%"
+HKR, Ndi\params\ScanProbeTimes,  default,    0, "3"
+HKR, Ndi\params\ScanProbeTimes,  min,        0, "3"
+HKR, Ndi\params\ScanProbeTimes,  max,        0, "5"
+HKR, Ndi\params\ScanProbeTimes,  step,       0, "1"
+HKR, Ndi\params\ScanProbeTimes,  Base,       0, "10"
+HKR, Ndi\params\ScanProbeTimes,  type,       0, "int"
+
+HKR, Ndi\params\CurrentChannel,  ParamDesc,  0, "%CurrentChannel%"
+HKR, Ndi\params\CurrentChannel,  default,    0, "1"
+HKR, Ndi\params\CurrentChannel,  min,        0, "1"
+HKR, Ndi\params\CurrentChannel,  max,        0, "14"
+HKR, Ndi\params\CurrentChannel,  step,       0, "1"
+HKR, Ndi\params\CurrentChannel,  Base,       0, "10"
+HKR, Ndi\params\CurrentChannel,  type,       0, "int"
+
+HKR, Ndi\params\ChannelPlan,  ParamDesc,  0, "%ChannelPlan%"
+HKR, Ndi\params\ChannelPlan,  default,    0, "12"
+HKR, Ndi\params\ChannelPlan,  min,        0, "0"
+HKR, Ndi\params\ChannelPlan,  max,        0, "96"
+HKR, Ndi\params\ChannelPlan,  step,       0, "1"
+HKR, Ndi\params\ChannelPlan,  Base,       0, "10"
+HKR, Ndi\params\ChannelPlan,  type,       0, "int"
+
+HKR, Ndi\params\ReceiveBuffers,  ParamDesc,  0, "%ReceiveBuffers%"
+HKR, Ndi\params\ReceiveBuffers,  default,    0, "64"
+HKR, Ndi\params\ReceiveBuffers,  min,        0, "32"
+HKR, Ndi\params\ReceiveBuffers,  max,        0, "128"
+HKR, Ndi\params\ReceiveBuffers,  step,       0, "1"
+HKR, Ndi\params\ReceiveBuffers,  Base,       0, "10"
+HKR, Ndi\params\ReceiveBuffers,  type,       0, "int"
+
+HKR, Ndi\params\TransmitBuffers, ParamDesc,  0, "%TransmitBuffers%"
+HKR, Ndi\params\TransmitBuffers, default,    0, "64"
+HKR, Ndi\params\TransmitBuffers, min,        0, "32"
+HKR, Ndi\params\TransmitBuffers, max,        0, "64"
+HKR, Ndi\params\TransmitBuffers, step,       0, "1"
+HKR, Ndi\params\TransmitBuffers, Base,       0, "10"
+HKR, Ndi\params\TransmitBuffers, type,       0, "int"
+
+HKR, Ndi\params\PhyPowerState, ParamDesc,  0, "%PhyPowerState%"
+HKR, Ndi\params\PhyPowerState, default,    0, "7"
+HKR, Ndi\params\PhyPowerState, min,        0, "0"
+HKR, Ndi\params\PhyPowerState, max,        0, "7"
+HKR, Ndi\params\PhyPowerState, step,       0, "1"
+HKR, Ndi\params\PhyPowerState, type,       0, "int"
+
+
+[ZTOP.Service]
+DisplayName     = %ZTOP.Service.DispName%
+ServiceType     = 1             ;SERVICE_KERNEL_DRIVER
+StartType       = 3             ;SERVICE_DEMAND_START
+ErrorControl    = 1             ;SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\zt9101d_drv.sys
+LoadOrderGroup  = NDIS
+
+
+
+[ZTOP.EventLog]
+AddReg = ZTOP.AddEventLog.reg
+
+[ZTOP.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+
+[ZTOP.CopyFiles]
+zt9101d_drv.sys,,,2
+
+[SourceDisksNames]
+;1 = %DiskDescription%,zt9101d_drv.sys,,
+1 = %DiskDescription%,zt9101d_drv.sys,,
+
+[SourceDisksFiles]
+zt9101d_drv.sys = 1,,
+;wdfcoinstaller$KMDFCOINSTALLERVERSION$.dll=1
+
+
+;-------------- WDF Coinstaller installation
+
+;[DestinationDirs]
+;CoInstaller_CopyFiles = 11
+
+[ZTOP.ndi.NTx86.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[ZTOP.ndi.NTAMD64.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[CoInstaller_CopyFiles]
+;wdfcoinstaller$KMDFCOINSTALLERVERSION$.dll
+
+;[SourceDisksFiles]
+;wdfcoinstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[CoInstaller_AddReg]
+;HKR,,CoInstallers32,0x00010000, "wdfcoinstaller01009.dll,WdfCoInstaller"
+
+[ZTOP.ndi.NTx86.Wdf]
+KmdfService = zt9101d_drv, ztopmicro_wdfsect
+
+[ZTOP.ndi.NTAMD64.Wdf]
+KmdfService = zt9101d_drv, ztopmicro_wdfsect
+
+[ztopmicro_wdfsect]
+KmdfLibraryVersion = 1.9
+
+;---------------------------------------------------------------;
+
+
+[Strings]
+ZTOP                          = "ZTOP Microelectronics Corporation"
+ZTOP.DeviceDesc_9101          = "USB 802.11N Wireless USB Adapter"
+ZTOP.Service.DispName         = "ZTOP 9101 802.11 Wireless Device Driver"
+DiskDescription              = "ZTOP Driver Disk 1"
+
+LocalSSID					 = "Local SSID"
+
+BandWidth					 = "Band Width"
+
+ScanChannelTime				 = "Scan Channel Time"
+ScanProbeTimes				 = "Scan Probe Times"
+BlockAckEnable				 = "Block Ack Enable"
+CurrentChannel				 = "Default Channel"
+ChannelPlan					 = "Country Channel Plan"
+TransmitBuffers              = "Transmit Buffers"
+ReceiveBuffers               = "Receive Buffers"
+PhyPowerState				 = "Phy Power State"
+;WorkMode					 = "Work Mode"

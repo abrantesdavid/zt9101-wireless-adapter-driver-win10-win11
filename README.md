@@ -91,6 +91,15 @@ zt9101d_drv.cat
 - Standard: IEEE 802.11n
 - Frequency: 2.4 GHz
 
+## Related Hardware IDs
+
+Some ZTOP/ZT9101 drivers are also associated with:
+
+USB\VID_350B&PID_9106
+USB\VID_350B&PID_9107
+USB\VID_2310&PID_9086
+
+Compatibility is not guaranteed.
 
 
 
